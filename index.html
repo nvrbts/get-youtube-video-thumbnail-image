@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get YouTube Video Thumbnail Image</title>
+</head>
+
+<style>
+    @import url(https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap);*,body{font-family:Rubik,sans-serif}button,input{padding:.5rem;border-radius:.25rem;color:#fff;outline:0;font-size:1rem}.image-block,.image-block img,button,input{max-width:600px;width:100%}*{margin:0;padding:0;box-sizing:border-box}body{background-color:#100c16;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100dvh;text-align:center;padding:1rem}a{color:inherit;text-decoration:none}p{padding-block:1rem}input{border:1px solid #7e7e7e;background-color:#1c1625}button{margin-bottom:3rem;border:1px solid #2e6b56;background-color:#19332a;transition:background-color .2s ease-in-out;cursor:pointer}button:hover{background-color:#104734}button:active{background-color:#0e3829}.image-block{position:relative;border-radius:.25rem;border:1px solid #7e7e7e;overflow:hidden;aspect-ratio:16/9}.image-block img{object-fit:cover}.image-block a{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);border-radius:50px;background-color:rgba(0,0,0,.3);padding:.5rem 1rem}input[name=url]{margin-bottom:1rem}input[name=imageUrl]{margin-top:1rem;cursor:copy}.hidden{display:none}
+</style>
+
+<body>
+    <h1>Get YouTube Video Thumbnail Image</h1>
+    <p>Just input the URL into this field to get YouTube video thumbnail image <span>absolutely for free and with incredible speed</span></p>
+
+    <input type="text" name="url" id="url" placeholder="Paste link here...">
+    <button onclick="g()">Get YouTube Video Thumbnail Image</button>
+
+    <div class="wrapper hidden">
+        <div class="image-block">
+            <img src="" alt="YouTube video Thumbnail Image">
+            <a href="" target="_blank" download>Open in new tab</a>
+        </div>
+        <input type="text" name="imageUrl" id="imageUrl" readonly onclick="this.select()">
+    </div>
+</body>
+
+<script>
+    const i = document.querySelector("#url");
+    function g() {
+        const v = (t = i.value) => {
+            try {
+                const e = new URL(t),
+                    n = e.hostname;
+                return n.includes("youtube.com")
+                    ? e.pathname == "/watch"
+                        ? e.searchParams.get("v")
+                        : e.pathname.startsWith("/embed/")
+                          ? e.pathname.split("/")[2]
+                          : e.pathname.startsWith("/shorts/")
+                            ? e.pathname.split("/")[2]
+                            : null
+                    : n.includes("youtu.be")
+                      ? e.pathname.substring(1)
+                      : null;
+            } catch (e) {
+                return null;
+            }
+        };
+        v() && (d.classList.remove("hidden"),
+            (e = d.querySelector(".image-block img")).src = `https://i.ytimg.com/vi/${v()}/maxresdefault.jpg`,
+            (t = d.querySelector(".image-block a")).href = e.src,
+            (n = d.querySelector("#imageUrl")).value = e.src);
+    }
+    const d = document.querySelector(".wrapper");
+</script>
+</html>
