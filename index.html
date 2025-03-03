@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get YouTube Video Thumbnail Image</title>
+    <meta name="description" content="Get YouTube video thumbnail image only by link on youtube video. You will get video thumbnail image and link on this image.">
+    <meta name="keywords" content="YouTube video thumbnail, YouTube video thumbnail image, get YouTube video thumbnail image, get YouTube video thumbnail image only by link, video thumbnail image, video thumbnail image from youtube video" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 
 <style>
-    @import url(https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap);*,body{font-family:Rubik,sans-serif}button,input{padding:.5rem;border-radius:.25rem;color:#fff;outline:0;font-size:1rem}.image-block,.image-block img,button,input{max-width:600px;width:100%}*{margin:0;padding:0;box-sizing:border-box}body{background-color:#100c16;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100dvh;text-align:center;padding:1rem}a{color:inherit;text-decoration:none}p{padding-block:1rem}input{border:1px solid #7e7e7e;background-color:#1c1625}button{margin-bottom:3rem;border:1px solid #2e6b56;background-color:#19332a;transition:background-color .2s ease-in-out;cursor:pointer}button:hover{background-color:#104734}button:active{background-color:#0e3829}.image-block{position:relative;border-radius:.25rem;border:1px solid #7e7e7e;overflow:hidden;aspect-ratio:16/9}.image-block img{object-fit:cover}.image-block a{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);border-radius:50px;background-color:rgba(0,0,0,.3);padding:.5rem 1rem}input[name=url]{margin-bottom:1rem}input[name=imageUrl]{margin-top:1rem;cursor:copy}.hidden{display:none}
+    @import url(https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap);*,body{font-family:Rubik,sans-serif}button,input{padding:.5rem;border-radius:.25rem;color:#fff;outline:0;font-size:1rem}.image-block,.image-block img{max-width:600px;width:100%;aspect-ratio:16/9}*,.image-block,.image-block img{margin:0;padding:0}*{box-sizing:border-box}body{background-color:#100c16;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100dvh;text-align:center;padding:1rem;overflow:hidden}a{color:inherit;text-decoration:none}p{padding-block:1rem}input{border:1px solid #7e7e7e;background-color:#1c1625;width:100%;max-width:600px}button{margin-bottom:3rem;border:1px solid #2e6b56;background-color:#19332a;transition:background-color .2s ease-in-out;width:100%;max-width:600px;cursor:pointer}button:hover{background-color:#104734}button:active{background-color:#0e3829}.image-block{position:relative;display:flex;border-radius:.25rem;border:1px solid #7e7e7e}.image-block img{border-radius:.2rem;object-fit:cover}.image-block #yotubeVideoThumbnailImage{position:relative;z-index:1}.image-block #yotubeVideoThumbnailImageGlow{position:absolute;top:0;left:0;z-index:0;filter:blur(50px);scale:1.15;opacity:.2}.image-block a{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);border-radius:50px;background-color:rgba(0,0,0,.3);padding:.5rem 1rem}input[name=url]{margin-bottom:1rem}input[id=imageUrl]{margin-top:1rem;cursor:copy}.hidden{display:none}#hint{color:#7e7e7e;text-align:start;margin-top:.25rem;display:block;font-size:.8rem}
 </style>
 
 <body>
@@ -19,10 +22,12 @@
 
     <div class="wrapper hidden">
         <div class="image-block">
-            <img src="" alt="YouTube video Thumbnail Image">
-            <a href="" target="_blank" download>Open in new tab</a>
+            <img src="" alt="YouTube video Thumbnail Image" id="yotubeVideoThumbnailImage">
+            <img src="" alt="YouTube video Thumbnail Image Glow" id="yotubeVideoThumbnailImageGlow">
+            <a href="" target="_blank" id="yotubeVideoThumbnailImageLink">Open in new tab</a>
         </div>
-        <input type="text" name="imageUrl" id="imageUrl" readonly onclick="this.select()">
+        <input type="text" name="YouTube_Video_Thumbnail_Image_Link" id="imageUrl" readonly onclick="this.select()">
+        <span id="hint">You can copy this link on this thumbnail image by pressing on it and then press "Copy" button</span>
     </div>
 </body>
 
@@ -49,7 +54,8 @@
             }
         };
         v() && (d.classList.remove("hidden"),
-            (e = d.querySelector(".image-block img")).src = `https://i.ytimg.com/vi/${v()}/maxresdefault.jpg`,
+            (e = d.querySelector(".image-block #yotubeVideoThumbnailImage")).src = `https://i.ytimg.com/vi/${v()}/maxresdefault.jpg`,
+            (w = d.querySelector(".image-block #yotubeVideoThumbnailImageGlow")).src = `https://i.ytimg.com/vi/${v()}/maxresdefault.jpg`,
             (t = d.querySelector(".image-block a")).href = e.src,
             (n = d.querySelector("#imageUrl")).value = e.src);
     }
